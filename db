@@ -1,0 +1,14 @@
+FROM postgres:16.2-alpine3.19
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=iliyas
+ENV POSTGRES_DB=server_final
+ENV PORT=5432
+ENV HOST=db
+
+ADD db_dump.sql /docker-entrypoint-initdb.d/
+ADD db_entrypoint.sh /db_entrypoint.sh
+
+RUN chmod +x /db_entrypoint.sh
+
+# ENTRYPOINT ["/db_entrypoint.sh"]

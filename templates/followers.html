@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+                    <div style="margin-top:100px" class="side-menu__suggestions-content">
+                        {% for user in followings %}
+                            <div class="side-menu__suggestion">
+                                <a href="{% url 'profile' user %}" class="side-menu__suggestion-avatar">
+                                    <img src="{{user.profile.image.url}}" alt="User Picture">
+                                </a>
+                                
+                                <div class="side-menu__suggestion-info">
+                                    {% if user.profile.first_name %}
+                                    <a href="{% url 'profile' user %}">{{user.profile.first_name|title}} {{user.profile.last_name|title}}</a>
+                                    {% else %}
+                                    <a href="{% url 'profile' user %}">{{user.username}}</a>
+                                    {% endif %}
+                                    <span>@{{user.username}}</span>
+                                </div>
+
+                                {% if follow_status == True %}
+                                <a href="{% url 'follow' user 0 %}" class="side-menu__suggestion-button">Follow</a>
+                                {% else %}
+                                <a href="{% url 'follow' user 1 %}" class="side-menu__suggestion-button">Follow</a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        
+                    </div>
+{% endblock content %}
