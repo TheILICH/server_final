@@ -7,6 +7,7 @@ services:
     image: theilich/app:latest
     container_name: app
     hostname: app
+    command: ./wait.sh db ./app_entrypoint.sh
     env_file:
       - ./.env
     ports:
